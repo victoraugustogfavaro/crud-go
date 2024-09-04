@@ -6,6 +6,7 @@ import (
 )
 
 func InitRoutes(r *gin.RouterGroup) {
+	// instanciando o caminho e passando a função que será executada nela
 						// parâmetro
 	r.GET("/getUserById/:userId", controller.FindUserByID)
 	r.GET("/getUserByEmail/:userEmail", controller.FindUserByEmail)
