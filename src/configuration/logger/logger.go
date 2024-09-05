@@ -8,6 +8,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+//variáveis globais
 var (
 	log *zap.Logger
 
@@ -15,7 +16,7 @@ var (
 	LOG_LEVEL = "LOG_LEVEL"
 )
 
-// configurando o init
+// configurando o init e o logger
 func init() {
 	logConfig := zap.Config{
 		OutputPaths: []string{getOutputLogs()},
