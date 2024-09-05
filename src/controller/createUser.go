@@ -8,6 +8,7 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/validation"
 	"github.com/victoraugustogfavaro/crud-go/src/controller/model/request"
 	"github.com/victoraugustogfavaro/crud-go/src/model"
+	"github.com/victoraugustogfavaro/crud-go/src/model/service"
 	"go.uber.org/zap"
 )
 
@@ -31,8 +32,10 @@ func CreateUser(c *gin.Context) {
 		userRequest.Email,
 		userRequest.Password,
 		userRequest.Name,
-		userRequest.Age,)
-	if err := domain.CreateUser(); err != nil {
+		userRequest.Age,
+	)
+	service := service.NewUserDomainService()
+	if err := service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
