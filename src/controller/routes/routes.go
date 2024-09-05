@@ -5,6 +5,7 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/controller"
 )
 
+// iniciar as rotas -> objeto(rota) 
 func InitRoutes(r *gin.RouterGroup) {
 	// instanciando o caminho e passando a função que será executada nela
 						// parâmetro

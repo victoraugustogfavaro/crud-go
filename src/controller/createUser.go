@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/victoraugustogfavaro/crud-go/src/configuration/rest_err"
+	"github.com/victoraugustogfavaro/crud-go/src/configuration/validation"
 	"github.com/victoraugustogfavaro/crud-go/src/controller/model/request"
 )
 
@@ -13,13 +13,14 @@ func CreateUser(c *gin.Context) {
 
 	// criando uma variável
 	var userRequest request.UserRequest
+
 	// colocar o conteúdo do body da requisição pra um objeto
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		// chamando o método
-		restErr := rest_err.NewBadRequestError(
-			fmt.Sprintf("Há campos incorretos, error=%\n", err.Error()))
-		
-		c.JSON(restErr.Code, restErr)
+		fmt.Sprintf("Há campos incorretos\n", err.Error())
+		errRest := validation.ValidateUserError(err)
+
+		c.JSON(errRest.Code, errRest)
 		return
 	}
 
