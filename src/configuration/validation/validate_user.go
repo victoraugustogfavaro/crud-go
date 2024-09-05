@@ -12,11 +12,13 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/rest_err"
 )
 
+// variáveis globais
 var (
 	Validate = validator.New()
-	transl   ut.Translator
+	transl ut.Translator
 )
 
+// antes de rodar o main
 func init() {
 	// caso dê tudo certo o ok vira true
 	if val, ok := binding.Validator.Engine().(*validator.Validate); ok {
