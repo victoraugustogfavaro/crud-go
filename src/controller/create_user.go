@@ -8,12 +8,12 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/validation"
 	"github.com/victoraugustogfavaro/crud-go/src/controller/model/request"
 	"github.com/victoraugustogfavaro/crud-go/src/model"
-	"github.com/victoraugustogfavaro/crud-go/src/model/service"
+	"github.com/victoraugustogfavaro/crud-go/src/view"
 	"go.uber.org/zap"
 )
 
 // todo o contexto da requisição
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	// mensagem no terminal
 	logger.Info("Init CreateUser controller",
 		zap.String("journey", "createUser"),
@@ -39,9 +39,9 @@ func CreateUser(c *gin.Context) {
 		userRequest.Age,
 	)
 
-	// instância o userDomainService, faz tratamento de erro e cria o usuário
-	service := service.NewUserDomainService()
-	if err := service.CreateUser(domain); err != nil {
+	// pega o método da userControllerInterface
+	// faz tratamento de erro e cria o usuário
+	if err := uc.service.CreateUser(domain); err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
@@ -49,5 +49,7 @@ func CreateUser(c *gin.Context) {
 	logger.Info("User created sucessfully",
 		zap.String("journey", "createUser"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
+		domain,
+	))
 }

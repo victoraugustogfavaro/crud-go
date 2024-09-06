@@ -3,4 +3,4 @@ package controller
 import "github.com/gin-gonic/gin"
 
 // conteúdo da requisição
-func DeleteUser(c *gin.Context){}
+func (uc *userControllerInterface) DeleteUser(c *gin.Context){}
