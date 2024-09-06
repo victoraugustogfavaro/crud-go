@@ -5,6 +5,7 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/model"
 )
 
+// encapsulamento
 func NewUserDomainService() UserDomainService {
 	return &userDomainService{}
 }

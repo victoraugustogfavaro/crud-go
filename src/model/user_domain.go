@@ -5,16 +5,16 @@ import (
 	"encoding/hex"
 )
 
+// interface de métodos
 type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
 	GetAge() int8
 	GetName() string
-
 	EncryptPassword()
 }
 
-// ???
+// construtor
 func NewUserDomain(
 	email, password, name string, age int8,
 ) UserDomainInterface {
@@ -23,6 +23,7 @@ func NewUserDomain(
 	}
 }
 
+// objeto criado (privado/encapsulado)
 type userDomain struct {
 	email    string
 	password string
@@ -30,6 +31,7 @@ type userDomain struct {
 	age      int8
 }
 
+// gets
 func (ud *userDomain) GetEmail() string {
 	return ud.email
 }
@@ -43,6 +45,7 @@ func (ud *userDomain) GetAge() int8 {
 	return ud.age
 }
 
+// função de criptografar a senha
 func (ud *userDomain) EncryptPassword() {
 	hash := md5.New()
 	defer hash.Reset()

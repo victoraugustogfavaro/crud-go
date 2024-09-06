@@ -2,7 +2,7 @@ package rest_err
 
 import "net/http"
 
-// criando objetos
+// criando objetos, objeto principal
 type RestErr struct {
 	Message string   `json:"message"`
 	Err     string   `json:"error"`
@@ -15,6 +15,7 @@ type Causes struct {
 	Message string `json:"message"`
 }
 
+// error é um método que retorna string
 func (r *RestErr) Error() string {
 	return r.Message
 }
@@ -29,7 +30,7 @@ func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 	}
 }
 
-// métodos para tratar cada erro
+// métodos para tratar cada erro e alterar com ponteiro o objeto principal
 func NewBadRequestError(message string) *RestErr {
 	return &RestErr{
 		Message: message,

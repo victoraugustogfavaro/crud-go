@@ -9,6 +9,8 @@ import (
 	"go.uber.org/zap"
 )
 
+// implementando a interface, função que cria o user e faz hash na senha
+// função que chama um método
 func (ud *userDomainService) CreateUser(
 	userDomain model.UserDomainInterface,
 ) *rest_err.RestErr {

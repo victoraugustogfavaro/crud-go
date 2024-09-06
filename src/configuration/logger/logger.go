@@ -8,14 +8,14 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-//variáveis globais
+// variáveis globais
 var (
-	log *zap.Logger
-
+	log        *zap.Logger
 	LOG_OUTPUT = "LOG_OUTPUT"
-	LOG_LEVEL = "LOG_LEVEL"
+	LOG_LEVEL  = "LOG_LEVEL"
 )
 
+// o init inicia antes do main.go
 // configurando o init e o logger
 func init() {
 	logConfig := zap.Config{
@@ -35,6 +35,7 @@ func init() {
 	log, _ = logConfig.Build()
 }
 
+// passar para as variáveis globais
 func getOutputLogs() string {
 	output := strings.ToLower(strings.TrimSpace(os.Getenv(LOG_OUTPUT)))
 	if output == "" {
@@ -44,19 +45,22 @@ func getOutputLogs() string {
 	return output
 }
 
+// caso de info
 func Info(message string, tags ...zap.Field) {
 	log.Info(message, tags...)
 	log.Sync()
 }
 
+// caso de erro
 func Error(message string, err error, tags ...zap.Field) {
 	tags = append(tags, zap.NamedError("error", err))
 	log.Info(message, tags...)
 	log.Sync()
 }
 
+// passar para as variáveis globais
 func getLevelLogs() zapcore.Level {
-	switch strings.ToLower(strings.TrimSpace(os.Getenv(LOG_LEVEL))){
+	switch strings.ToLower(strings.TrimSpace(os.Getenv(LOG_LEVEL))) {
 	case "info":
 		return zapcore.InfoLevel
 	case "error":

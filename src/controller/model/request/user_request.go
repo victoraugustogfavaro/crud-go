@@ -1,6 +1,6 @@
 package request
 
-// criando objetos
+// objeto com os campos do user (request) e validações
 type UserRequest struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=6,containsany=!@#$%*"`
