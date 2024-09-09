@@ -2,26 +2,35 @@ package mongodb
 
 import (
 	"context"
-
-	"github.com/victoraugustogfavaro/crud-go/src/configuration/logger"
+	"os"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
-// iniciar conexão com o banco
-func InitConnection() {
-	ctx := context.Background()
-	client, err := mongo.Connect(options.Client().ApplyURI("mongodb://localhost:27017"))
+// variáveis global
+var (
+	MONGODB_URL = "MONGODB_URL"
+	MONGODB_USER_DB = "MONGO_USER_DB"
+)
+
+// construtor da conexão com o banco de dados
+func NewMongoDBConnection(ctx context.Context) (*mongo.Database, error) {
+	// pegando o conteúdo do .env
+	mongodb_uri := os.Getenv(MONGODB_URL)
+	mongodb_database := os.Getenv(MONGODB_USER_DB)
+
+	client, err := mongo.Connect(options.Client().ApplyURI(mongodb_uri))
 
 	// tratamento de erro
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	// pingar pra testar
 	if err := client.Ping(ctx, nil); err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	logger.Info("Connection with db successful")
+	// instanciando banco de dados
+	return client.Database(mongodb_database), nil
 }
