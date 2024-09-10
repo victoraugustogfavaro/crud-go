@@ -25,6 +25,7 @@ func main() {
 		log.Fatalf("Error trying to connect to database, error=%s \n", err.Error())
 	}
 
+	// inicializando dependências
 	userController := initDependencies(database)
 
 	// inicializando as rotas

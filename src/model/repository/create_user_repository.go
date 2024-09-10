@@ -12,11 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-// variável/constante global
-const (
-	MONGODB_USER_DB = "MONGODB_USER_DB"
-)
-
 func (ur *userRepository) CreateUser(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
@@ -26,6 +21,7 @@ func (ur *userRepository) CreateUser(
 
 	// collection é a "tabela" em NoSQL
 	collection_name := os.Getenv(MONGODB_USER_DB)
+	
 	collection := ur.databaseConnection.Collection(collection_name)
 
 	// pegando os valores e convertendo pra entity
@@ -45,6 +41,6 @@ func (ur *userRepository) CreateUser(
 		"CreateUser repository executed successfully", 
 		zap.String("userId", value.ID.Hex()),
 		zap.String("journey", "createUser"))
-		
+
 	return converter.ConvertEntityToDomain(*value), nil
 }
