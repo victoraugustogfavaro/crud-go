@@ -3,15 +3,11 @@ package main
 import (
 	"context"
 	"log"
-
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/logger"
-	"github.com/victoraugustogfavaro/crud-go/src/controller"
 	"github.com/victoraugustogfavaro/crud-go/src/controller/routes"
 	"github.com/victoraugustogfavaro/crud-go/src/database/mongodb"
-	"github.com/victoraugustogfavaro/crud-go/src/model/repository"
-	"github.com/victoraugustogfavaro/crud-go/src/model/service"
 )
 
 func main() {
@@ -29,10 +25,7 @@ func main() {
 		log.Fatalf("Error trying to connect to database, error=%s \n", err.Error())
 	}
 
-	// inicializar dependências
-	repo := repository.NewUserRepository(database)
-	service := service.NewUserDomainService(repo)
-	userController := controller.NewUserControllerInterface(service)
+	userController := initDependencies(database)
 
 	// inicializando as rotas
 	router := gin.Default()
@@ -41,6 +34,5 @@ func main() {
 	// tratamento de erros
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
-
 	}
 }

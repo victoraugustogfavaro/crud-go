@@ -12,15 +12,22 @@ func (ud *userDomainService) CreateUser(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 
-	logger.Info("Init createUser model", zap.String("journey", "createUser"))
+	logger.Info("Init createUser model.",
+		zap.String("journey", "createUser"))
 
 	// hash da senha
 	userDomain.EncryptPassword()
 
+	// tratamento de erro
 	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
 	if err != nil {
+		logger.Error("Error trying to call repository", err, zap.String("journey", "createUser"))
 		return nil, err
 	}
 
+	// logger caso dê tudo certo
+	logger.Info("CreateUser service executed successfully",
+		zap.String("userId", userDomainRepository.GetID()),
+		zap.String("journey", "createUser"))
 	return userDomainRepository, nil
 }
