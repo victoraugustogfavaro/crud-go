@@ -10,7 +10,7 @@ import (
 // variáveis global
 var (
 	MONGODB_URL     = "MONGODB_URL"
-	MONGODB_USER_DB = "MONGO_USER_DB"
+	MONGODB_USER_DB = "MONGODB_USER_DB"
 )
 
 // construtor da conexão com o banco de dados

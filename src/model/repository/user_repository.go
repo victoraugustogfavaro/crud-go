@@ -11,7 +11,7 @@ import (
 func NewUserRepository(
 	database *mongo.Database,
 ) UserRepository {
-	return &userRepository {
+	return &userRepository{
 		database,
 	}
 }

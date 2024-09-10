@@ -41,7 +41,8 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 
 	// pega o método da userControllerInterface
 	// faz tratamento de erro e cria o usuário
-	if err := uc.service.CreateUser(domain); err != nil {
+	domainResult, err := uc.service.CreateUser(domain)
+	if err != nil {
 		c.JSON(err.Code, err)
 		return
 	}
@@ -50,6 +51,6 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		zap.String("journey", "createUser"))
 
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
-		domain,
+		domainResult,
 	))
 }
