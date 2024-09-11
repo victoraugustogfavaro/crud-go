@@ -3,7 +3,7 @@ package repository
 import (
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/rest_err"
 	"github.com/victoraugustogfavaro/crud-go/src/model"
-	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // variável/constante global

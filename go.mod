@@ -5,6 +5,11 @@ go 1.23.0
 require github.com/joho/godotenv v1.5.1
 
 require (
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/montanaflynn/stats v0.7.1 // indirect
+)
+
+require (
 	github.com/bytedance/sonic v1.12.2 // indirect
 	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
@@ -33,7 +38,6 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	go.mongodb.org/mongo-driver v1.16.1
-	go.mongodb.org/mongo-driver/v2 v2.0.0-beta1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/arch v0.10.0 // indirect

@@ -11,7 +11,8 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/model/repository/entity"
 	"github.com/victoraugustogfavaro/crud-go/src/model/repository/entity/converter"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 )
 
@@ -78,11 +79,13 @@ func (ur *userRepository) FindUserByID(
 	userEntity := &entity.UserEntity{}
 
 	// tentar encontrar o id no banco
-	filter := bson.D{{Key: "_id", Value: id}}
-	err := collection.FindOne(
+	objectId, _ := primitive.ObjectIDFromHex(id)
+	filter := bson.D{{Key: "_id", Value: objectId}}
+	find := collection.FindOne(
 		context.Background(),
 		filter,
-	).Decode(userEntity)
+	)
+	err := find.Decode(userEntity)
 
 	// tratamento de erros
 	if err != nil {

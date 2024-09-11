@@ -19,10 +19,11 @@ type userDomainService struct {
 
 type UserDomainService interface {
 	// retorna caso tenha dado erro
-	CreateUser(model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr)
+	CreateUserServices(model.UserDomainInterface) (model.UserDomainInterface, *rest_err.RestErr)
 	// recebe id para atualizar e retorna se deu erro ou não
 	UpdateUser(string, model.UserDomainInterface) *rest_err.RestErr
 	// retorna ponteiro, pois pode estar vázio
-	FindUser(string) (*model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByIDServices(id string,) (model.UserDomainInterface, *rest_err.RestErr)
+	FindUserByEmailServices(email string,) (model.UserDomainInterface, *rest_err.RestErr)
 	DeleteUser(string) *rest_err.RestErr
 }

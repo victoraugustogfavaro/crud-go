@@ -41,7 +41,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 
 	// pega o método da userControllerInterface
 	// faz tratamento de erro e cria o usuário no banco de dados / mongodb
-	domainResult, err := uc.service.CreateUser(domain)
+	domainResult, err := uc.service.CreateUserServices(domain)
 	if err != nil {
 		logger.Error("Error trying to call CreateUser service", err,
 			zap.String("journey", "createUser"))

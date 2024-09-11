@@ -8,7 +8,7 @@ import (
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/rest_err"
 	"github.com/victoraugustogfavaro/crud-go/src/model"
 	"github.com/victoraugustogfavaro/crud-go/src/model/repository/entity/converter"
-	"go.mongodb.org/mongo-driver/v2/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 )
 
@@ -21,7 +21,7 @@ func (ur *userRepository) CreateUser(
 
 	// collection é a "tabela" em NoSQL
 	collection_name := os.Getenv(MONGODB_USER_DB)
-	
+
 	collection := ur.databaseConnection.Collection(collection_name)
 
 	// pegando os valores e convertendo pra entity
@@ -35,10 +35,10 @@ func (ur *userRepository) CreateUser(
 		return nil, rest_err.NewInternalServerError(err.Error())
 	}
 
-	value.ID = result.InsertedID.(bson.ObjectID)
+	value.ID = result.InsertedID.(primitive.ObjectID)
 
 	logger.Info(
-		"CreateUser repository executed successfully", 
+		"CreateUser repository executed successfully",
 		zap.String("userId", value.ID.Hex()),
 		zap.String("journey", "createUser"))
 

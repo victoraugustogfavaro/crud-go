@@ -3,11 +3,15 @@ package main
 import (
 	"context"
 	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/logger"
+	"github.com/victoraugustogfavaro/crud-go/src/controller"
 	"github.com/victoraugustogfavaro/crud-go/src/controller/routes"
 	"github.com/victoraugustogfavaro/crud-go/src/database/mongodb"
+	"github.com/victoraugustogfavaro/crud-go/src/model/repository"
+	"github.com/victoraugustogfavaro/crud-go/src/model/service"
 )
 
 func main() {
@@ -26,7 +30,9 @@ func main() {
 	}
 
 	// inicializando dependências
-	userController := initDependencies(database)
+	repo := repository.NewUserRepository(database)
+	service := service.NewUserDomainService(repo)
+	userController := controller.NewUserControllerInterface(service)
 
 	// inicializando as rotas
 	router := gin.Default()

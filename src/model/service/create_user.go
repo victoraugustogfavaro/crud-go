@@ -8,7 +8,7 @@ import (
 )
 
 // implementando a interface
-func (ud *userDomainService) CreateUser(
+func (ud *userDomainService) CreateUserServices(
 	userDomain model.UserDomainInterface,
 ) (model.UserDomainInterface, *rest_err.RestErr) {
 
