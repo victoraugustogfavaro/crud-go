@@ -17,9 +17,10 @@ func (uc *userControllerInterface) FindUserByID(c *gin.Context) {
 		zap.String("journey", "findUserByID"),
 	)
 
-	// verificando se é id e tratando erros
+	// pegando o parâmetro - url
 	userId := c.Param("userId")
-
+	
+	// verificando se é id e tratando erros
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
 		logger.Error("Error trying to validate userId",
 			err,
@@ -33,6 +34,7 @@ func (uc *userControllerInterface) FindUserByID(c *gin.Context) {
 		return
 	}
 
+	// vai ir buscar no banco e retornar erro caso não ache
 	userDomain, err := uc.service.FindUserByIDServices(userId)
 	if err != nil {
 		logger.Error("Error trying to call findUserByID services",
@@ -47,6 +49,7 @@ func (uc *userControllerInterface) FindUserByID(c *gin.Context) {
 		zap.String("journey", "findUserByID"),
 	)
 
+	// tudo certo e converte para visualização
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
 		userDomain,
 	))
@@ -75,6 +78,7 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 		return
 	}
 
+	// vai ir buscar no banco e retornar erro caso não ache
 	userDomain, err := uc.service.FindUserByEmailServices(userEmail)
 	if err != nil {
 		logger.Error("Error trying to call findUserByEmail services",
@@ -89,6 +93,7 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 		zap.String("journey", "findUserByEmail"),
 	)
 
+	// tudo certo e converte para visualização
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
 		userDomain,
 	))

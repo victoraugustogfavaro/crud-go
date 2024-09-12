@@ -23,7 +23,6 @@ type UserControllerInterface interface {
 	DeleteUser(c *gin.Context)
 }
 
-// criando objeto (público)
 type userControllerInterface struct {
 	service service.UserDomainService
 }

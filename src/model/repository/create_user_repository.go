@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"os"
-
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/logger"
 	"github.com/victoraugustogfavaro/crud-go/src/configuration/rest_err"
 	"github.com/victoraugustogfavaro/crud-go/src/model"

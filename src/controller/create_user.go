@@ -21,7 +21,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	// variável do user 'json'
 	var userRequest request.UserRequest
 
-	// tratamento de erro
+	// tratamento de erro no objeto enviado
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		logger.Error("Error trying to validate user info", err,
 			zap.String("journey", "createUser"))

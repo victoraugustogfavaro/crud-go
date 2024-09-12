@@ -7,9 +7,9 @@ import (
 // público
 type UserEntity struct {
 	// ignorar caso o valor seja vázio
-	ID       primitive.ObjectID `bson:"_id"`
-	Email    string             `bson:"email"`
-	Password string             `bson:"password"`
-	Name     string             `bson:"name"`
-	Age      int8               `bson:"age"`
+	ID       primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Email    string             `bson:"email,omitempty"`
+	Password string             `bson:"password,omitempty"`
+	Name     string             `bson:"name,omitempty"`
+	Age      int8               `bson:"age,omitempty"`
 }
