@@ -24,15 +24,19 @@ type userRepository struct {
 	databaseConnection *mongo.Database
 }
 
-// interface com os métodos 
+// interface com os métodos
 type UserRepository interface {
 	CreateUser(
 		userDomain model.UserDomainInterface,
 	) (model.UserDomainInterface, *rest_err.RestErr)
-	
+
 	UpdateUser(
 		userId string,
 		userDomain model.UserDomainInterface,
+	) *rest_err.RestErr
+
+	DeleteUser(
+		userId string,
 	) *rest_err.RestErr
 
 	FindUserByEmail(
@@ -42,5 +46,4 @@ type UserRepository interface {
 	FindUserByID(
 		id string,
 	) (model.UserDomainInterface, *rest_err.RestErr)
-
 }
